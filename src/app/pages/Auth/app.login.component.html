@@ -1,0 +1,28 @@
+<div class="login-body">
+    <div id="login-wrapper">
+        <img src="assets/layout/images/login-logo.png" alt="omega-layout"  />
+
+        <div id="login-container">
+            <span class="title">Fugo Store</span>
+
+            <div class="grid p-fluid">
+                <div class="col-12">
+                    <input type="email" autocomplete="off" pInputText placeholder="Email" />
+                </div>
+                <div class="col-12">
+                    <input type="password" autocomplete="off" pInputText placeholder="Contraseña" />
+                </div>
+
+                <div class="col-12 md:col-6">
+                    <a href="#">Contraseña Olvidada</a>
+                </div>
+                <div class="col-12 flex flex-column">
+                    <p-button type="button" label="Iniciar Sesión" icon="pi pi-user" [routerLink]="['/']"></p-button>
+                    <p-button class="py-3" styleClass="p-button-success" type="button" label="Registrarme" icon="pi pi-plus" [routerLink]="['/registro']"></p-button>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-footer">Fugo Store POS 2022.</div>
+    </div>
+</div>

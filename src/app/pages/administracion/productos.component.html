@@ -1,0 +1,147 @@
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="col-12 my-2">
+                        <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success mr-2" (click)="nuevoProducto()"></button>
+                        <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger mr-2" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+                    </div>
+                </ng-template>
+            </p-toolbar>
+            <p-table [value]="" responsiveLayout="scroll" [value]="productos">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <button type="button" pButton pRipple icon="pi pi-file" (click)="dt.exportCSV()" class="mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+                        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Imagen</th>
+                        <th>
+                            Fecha de Ingreso
+                            <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+                        </th>
+                        <th>
+                            <div class="">
+                                Categoria
+                                <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="header">
+                                        <div class="px-3 pt-3 pb-0">
+                                            <span class="font-bold">Seleccionar Categoria</span>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-representative-option">
+                                                    <img [alt]="option.label" src="assets/showcase/images/demo/avatar/{{option.image}}" width="32" style="vertical-align: middle" />
+                                                    <span class="ml-1">{{option.name}}</span>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
+                                    </ng-template>
+                                </p-columnFilter>
+                            </div>
+                        </th>
+                        <th>Estado</th>
+                        <th>Locación</th>
+                        <th>Precio de Compra</th>
+                        <th>Precio de Venta</th>
+                        <th>Observaciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td>{{product.id}}</td>
+                        <td>{{product.nombre}}</td>
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
+                            <img [src]="'assets/demo/images/product/' + product.imagen+'.jpg'" [alt]="product.name" width="100" class="shadow-4" />
+                        </td>
+                        <td>{{product.FechadeIngreso}}</td>
+                        <td>{{product.Categoria}}</td>
+                        <td>{{product.estado}}</td>
+                        <td>{{product.locacion}}</td>
+                        <td>{{product.precioCompra | currency}}</td>
+                        <td>{{product.precioVenta | currency}}</td>
+                        <td>{{product.observacion}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                        En total hay {{productos ? productos.length : 100 }} Productos.
+                    </div>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+</div>
+
+
+
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Agregar Producto" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+        <form class="p-fluid">
+            <div class="field">
+                <label for="name">Nombre</label>
+                <input type="text" pInputText id="name"  required autofocus />
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Name is required.</small>
+            </div>
+
+            <div class="field">
+                <label for="start">Fecha</label>
+                <p-calendar  appendTo="body"></p-calendar>
+            </div>
+
+            <div class="field">
+                <label for="status">Categoria</label>
+                <p-dropdown [options]="cities" placeholder="Selecciona una categoria" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
+
+            <div class="field">
+                <label for="status">Estado</label>
+                <p-dropdown [options]="cities" placeholder="Selecciona un estado" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
+
+            <div class="field">
+                <label for="status">Locacion</label>
+                <p-dropdown [options]="cities" placeholder="Selecciona una locacion" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
+
+            <div class="field">
+                <label for="status">Precio Compra</label>
+                <p-inputNumber  inputId="currency-us" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+
+
+            <div class="field">
+                <label for="status">Precio Venta</label>
+                <p-inputNumber  inputId="currency-us" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+
+            <div class="field">
+                <label for="description">Observaciones</label>
+                <textarea id="description" pInputTextarea required rows="3" cols="20"></textarea>
+            </div>
+
+            <div class="field">
+                <label for="description">Imagen</label>
+                <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onBasicUpload($event)" ></p-fileUpload>
+            </div>
+
+
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>

@@ -1,0 +1,46 @@
+<div class="register-body">
+    <div id="login-wrapper">
+        <img src="assets/layout/images/login-logo.png" alt="omega-layout"  />
+
+        <div id="login-container">
+            <span class="title">Fugo Store</span>
+
+            <form class="grid p-fluid">
+
+                    <div class="col-12">
+                        <input type="text" autocomplete="off" pInputText placeholder="Nombre" />
+                    </div>
+                    <div class="col-12">
+                        <input type="text" autocomplete="off" pInputText placeholder="Apellido" />
+                    </div>
+                    <div class="col-12">
+                        <input type="text" autocomplete="off" pInputText placeholder="Cedula de Identidad" />
+                    </div>
+                    <div class="col-12">
+                        <input type="text" autocomplete="off" pInputText placeholder="Nombre de Banco" />
+                    </div>
+                    <div class="col-12">
+                        <input type="text" autocomplete="off" pInputText placeholder="Numero de cuenta" />
+                    </div>
+                    <div class="col-12">
+                        <input type="text" autocomplete="off" pInputText placeholder="Numero de telefono" />
+                    </div>
+                    <div class="col-12">
+                        <input type="email" autocomplete="off" pInputText placeholder="Correo" />
+                    </div>
+                    <div class="col-12">
+                        <input type="password" autocomplete="off" pInputText placeholder="Contraseña" />
+                    </div>
+                    <div class="col-12 ">
+                        <p-button class="py-3" styleClass="p-button-success" type="button" label="Registrarme" icon="pi pi-plus" [routerLink]="['/']"></p-button>
+                    </div>
+
+                </form>
+                <div class="col-12 md:col-6">
+                    <a [routerLink]="['/login']">Ya tengo cuenta</a>
+                </div>
+        </div>
+
+        <div class="register-footer">Fugo Store POS 2022.</div>
+    </div>
+</div>
