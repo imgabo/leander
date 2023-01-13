@@ -139,12 +139,13 @@ import {MenuService} from './app.menu.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { AppLoginComponent } from './pages/Auth/app.login.component';
-import { RegistroComponent } from './pages/Auth/registro.component';
-import { ProductosComponent } from './pages/administracion/productos.component';
-import { CategoriasComponent } from './pages/administracion/variables/categorias.component';
-import { EstadosComponent } from './pages/administracion/variables/estados.component';
-import { LocacionesComponent } from './pages/administracion/variables/locaciones.component';
+
+
+import { ApiModule } from './api/api.module';
+import { environment } from 'src/environments/environment';
+import { MessageService } from 'primeng/api';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AdministracionModule } from './pages/administracion/administracion.module';
 
 
 
@@ -155,6 +156,10 @@ FullCalendarModule.registerPlugins([
     timeGridPlugin,
     interactionPlugin
 ]);
+
+export function tokenGetter() {
+    return localStorage.getItem("token");
+};
 
 @NgModule({
     imports: [
@@ -244,6 +249,13 @@ FullCalendarModule.registerPlugins([
         TreeTableModule,
         VirtualScrollerModule,
         AppCodeModule,
+
+        JwtModule.forRoot({
+            config:{
+                tokenGetter: tokenGetter
+            }
+        }),
+        ApiModule.forRoot({rootUrl:environment.urlBack})
     ],
     declarations: [
         AppComponent,
@@ -274,7 +286,6 @@ FullCalendarModule.registerPlugins([
         IconsComponent,
         AppCrudComponent,
         AppCalendarComponent,
-        AppLoginComponent,
         AppInvoiceComponent,
         AppHelpComponent,
         AppNotfoundComponent,
@@ -283,17 +294,15 @@ FullCalendarModule.registerPlugins([
         AppAccessdeniedComponent,
         BlocksComponent,
         BlockViewer,
-        RegistroComponent,
-        ProductosComponent,
-        CategoriasComponent,
-        EstadosComponent,
-        LocacionesComponent,
+
+
+
 
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, BreadcrumbService
+        PhotoService, ProductService, MenuService, BreadcrumbService, MessageService
     ],
     bootstrap: [AppComponent]
 })

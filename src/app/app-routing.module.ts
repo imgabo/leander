@@ -30,12 +30,7 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {BlocksComponent} from './blocks/blocks/blocks.component';
-import { AppLoginComponent } from './pages/Auth/app.login.component';
-import { RegistroComponent } from './pages/Auth/registro.component';
-import { ProductosComponent } from './pages/administracion/productos.component';
-import { CategoriasComponent } from './pages/administracion/variables/categorias.component';
-import { EstadosComponent } from './pages/administracion/variables/estados.component';
-import { LocacionesComponent } from './pages/administracion/variables/locaciones.component';
+
 
 @NgModule({
     imports: [
@@ -55,16 +50,18 @@ import { LocacionesComponent } from './pages/administracion/variables/locaciones
                     {path: 'uikit/panel', component: PanelsDemoComponent},
                     {path: 'uikit/overlay', component: OverlaysDemoComponent},
                     {path: 'uikit/menu', loadChildren: () => import('./demo/view/menus/menus.module').then(m => m.MenusModule)},
+                    {path:'administracion', loadChildren: () =>  import('../app/pages/administracion/administracion.module').then(m => m.AdministracionModule)},
                     {path: 'uikit/media', component: MediaDemoComponent},
                     {path: 'uikit/message', component: MessagesDemoComponent},
                     {path: 'uikit/misc', component: MiscDemoComponent},
                     {path: 'uikit/charts', component: ChartsDemoComponent},
                     {path: 'uikit/file', component: FileDemoComponent},
                     {path: 'utilities/icons', component: IconsComponent},
-                    {path: 'administracion/productos', component: ProductosComponent},
-                    {path: 'administracion/categorias', component: CategoriasComponent},
-                    {path: 'administracion/estados', component: EstadosComponent},
-                    {path: 'administracion/localidades', component: LocacionesComponent},
+
+                    // {path: 'administracion/productos', component: ProductosComponent},
+                    // {path: 'administracion/categorias', component: CategoriasComponent},
+                    // {path: 'administracion/estados', component: EstadosComponent},
+                    // {path: 'administracion/localidades', component: LocacionesComponent},
                     {path: 'pages/crud', component: AppCrudComponent},
                     {path: 'pages/calendar', component: AppCalendarComponent},
                     {path: 'pages/timeline', component: AppTimelineDemoComponent},
@@ -73,15 +70,17 @@ import { LocacionesComponent } from './pages/administracion/variables/locaciones
                     {path: 'pages/empty', component: EmptyDemoComponent},
                     {path: 'documentation', component: DocumentationComponent},
                     {path: 'blocks', component: BlocksComponent},
-                ]
+
+                ],
+
             },
 
+            {path: 'auth', loadChildren: () => import('../app/pages/Auth/auth.module').then (m => m.AuthModule)},
             {path: 'error', component: AppErrorComponent},
             {path: 'access', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},
-            {path: 'login', component: AppLoginComponent},
-            {path: 'registro', component: RegistroComponent},
-            {path: '**', redirectTo: '/notfound'},
+
+            //{path: '**', redirectTo: '/notfound'},
         ], {scrollPositionRestoration: 'enabled'})
     ],
     exports: [RouterModule]

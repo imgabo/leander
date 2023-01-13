@@ -4,8 +4,8 @@
                                 'sidebar-inactive-l':menuInactiveDesktop,
                                 'sidebar-active-m':menuActiveMobile,
                                 'p-ripple-disabled': !app.ripple, 'p-input-filled': app.inputStyle === 'filled'}">
+    <p-toast position="top-right"></p-toast>
     <app-topbar></app-topbar>
-
     <div class="sidebar" (click)="onMenuClick()">
         <div class="sidebar-scroll-content">
             <div class="logo" routerLink="/" style="outline: none; cursor: pointer;">

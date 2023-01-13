@@ -1,3 +1,4 @@
+<p-toast position="top-right"></p-toast>
 <div class="register-body">
     <div id="login-wrapper">
         <img src="assets/layout/images/login-logo.png" alt="omega-layout"  />
@@ -5,39 +6,69 @@
         <div id="login-container">
             <span class="title">Fugo Store</span>
 
-            <form class="grid p-fluid">
+            <form [formGroup]="registroForm" (ngSubmit)="onRegister()" class="grid p-fluid">
 
                     <div class="col-12">
-                        <input type="text" autocomplete="off" pInputText placeholder="Nombre" />
+                        <input type="text"  pInputText placeholder="Nombre" formControlName="nombre" />
+                        <div *ngIf="validField('nombre')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['nombre'].errors?.['required']">Se requiere nombre*</span>
+                            <span class="p-error" *ngIf="registroForm.controls['nombre'].errors?.['minlength']">Debe ser mayor a 5 caracteres*</span>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <input type="text" autocomplete="off" pInputText placeholder="Apellido" />
+                        <input type="text" autocomplete="off" pInputText placeholder="Apellido" formControlName="apellido" />
+                        <div *ngIf="validField('apellido')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['apellido'].errors?.['required']">Se requiere nombre*</span>
+                            <span class="p-error" *ngIf="registroForm.controls['apellido'].errors?.['minlength']">Debe ser mayor a 5 caracteres*</span>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <input type="text" autocomplete="off" pInputText placeholder="Cedula de Identidad" />
+                        <input type="text" autocomplete="off" pInputText placeholder="Cedula de Identidad" formControlName="cedula_identidad" />
+                        <div *ngIf="validField('cedula_identidad')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['cedula_identidad'].errors?.['required']">Se requiere cedula de identidad*</span>
+                            <span class="p-error" *ngIf="registroForm.controls['cedula_identidad'].errors?.['pattern']">No es formato correcto(sin puntos)</span>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <input type="text" autocomplete="off" pInputText placeholder="Nombre de Banco" />
+                        <input type="text" autocomplete="off" pInputText placeholder="Nombre de Banco" formControlName="nombre_banco" />
+                        <div *ngIf="validField('nombre_banco')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['nombre_banco'].errors?.['required']">Se requiere nombre de banco *</span>
+                            <span class="p-error" *ngIf="registroForm.controls['nombre_banco'].errors?.['minlength']">Debe ser mayor a 5 caracteres*</span>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <input type="text" autocomplete="off" pInputText placeholder="Numero de cuenta" />
+                        <input type="text" autocomplete="off" pInputText placeholder="Numero de cuenta" formControlName="numero_cuenta" />
+                        <div *ngIf="validField('numero_cuenta')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['numero_cuenta'].errors?.['required']">Se requiere numero de cuenta de banco *</span>
+                            <span class="p-error" *ngIf="registroForm.controls['numero_cuenta'].errors?.['pattern']">Formato incorrecto solo números</span>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <input type="text" autocomplete="off" pInputText placeholder="Numero de telefono" />
+                        <input type="text" autocomplete="off" pInputText placeholder="Numero de telefono" formControlName="numero_telefono"/>
+                        <div *ngIf="validField('numero_telefono')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['numero_telefono'].errors?.['required']">Se requiere numero de telefono *</span>
+                            <span class="p-error" *ngIf="registroForm.controls['numero_telefono'].errors?.['pattern']">Formato incorrecto solo números</span>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <input type="email" autocomplete="off" pInputText placeholder="Correo" />
+                        <input type="email" autocomplete="off" pInputText placeholder="Correo" formControlName="email"/>
+                        <div *ngIf="validField('email')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['email'].errors?.['required']">Se requiere correo electroníco *</span>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <input type="password" autocomplete="off" pInputText placeholder="Contraseña" />
+                        <input type="password" autocomplete="off" pInputText placeholder="Contraseña" formControlName="password" />
+                        <div *ngIf="validField('password')" class="text-danger">
+                            <span class="p-error" *ngIf="registroForm.controls['password'].errors?.['required']">Se requiere contraseña *</span>
+                        </div>
                     </div>
                     <div class="col-12 ">
-                        <p-button class="py-3" styleClass="p-button-success" type="button" label="Registrarme" icon="pi pi-plus" [routerLink]="['/']"></p-button>
+                        <p-button class="py-3" styleClass="p-button-success" type="submit" label="Registrarme" icon="pi pi-plus" ></p-button>
                     </div>
 
                 </form>
                 <div class="col-12 md:col-6">
-                    <a [routerLink]="['/login']">Ya tengo cuenta</a>
+                    <a [routerLink]="['/auth']">Ya tengo cuenta</a>
                 </div>
         </div>
 
