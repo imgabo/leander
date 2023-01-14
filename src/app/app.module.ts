@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
@@ -30,6 +30,7 @@ import {DataViewModule} from 'primeng/dataview';
 import {DialogModule} from 'primeng/dialog';
 import {DividerModule} from 'primeng/divider';
 import {DropdownModule} from 'primeng/dropdown';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {FieldsetModule} from 'primeng/fieldset';
 import {FileUploadModule} from 'primeng/fileupload';
 import {FullCalendarModule} from '@fullcalendar/angular';
@@ -146,6 +147,7 @@ import { environment } from 'src/environments/environment';
 import { MessageService } from 'primeng/api';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdministracionModule } from './pages/administracion/administracion.module';
+import { VariablesComponent } from './shared/components/dialogs/variables/variables.component';
 
 
 
@@ -192,6 +194,9 @@ export function tokenGetter() {
         DialogModule,
         DividerModule,
         DropdownModule,
+        DynamicDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
         FieldsetModule,
         FileUploadModule,
         FullCalendarModule,
@@ -294,6 +299,7 @@ export function tokenGetter() {
         AppAccessdeniedComponent,
         BlocksComponent,
         BlockViewer,
+        VariablesComponent,
 
 
 

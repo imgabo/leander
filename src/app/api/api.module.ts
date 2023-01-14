@@ -5,6 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AuthService } from './services/auth.service';
+import { CategoriasService } from './services/categorias.service';
+import { EstadosService } from './services/estados.service';
+import { LocalidadesService } from './services/localidades.service';
+import { ProductosService } from './services/productos.service';
 import { WeatherForecastService } from './services/weather-forecast.service';
 
 /**
@@ -16,6 +20,10 @@ import { WeatherForecastService } from './services/weather-forecast.service';
   declarations: [],
   providers: [
     AuthService,
+    CategoriasService,
+    EstadosService,
+    LocalidadesService,
+    ProductosService,
     WeatherForecastService,
     ApiConfiguration
   ],

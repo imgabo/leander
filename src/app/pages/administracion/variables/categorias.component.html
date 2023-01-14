@@ -9,7 +9,7 @@
                 </ng-template>
             </p-toolbar>
 
-            <p-table  [rows]="10" [paginator]="true"
+            <p-table  [rows]="10" [paginator]="true" [value]="categorias"
                 responsiveLayout="scroll"
                 [rowHover]="true" dataKey="id"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
@@ -21,16 +21,22 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon>
+                        <th *ngFor="let col of cols">
+                            {{col.header}}
                         </th>
-                        <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon>
-                        </th>
-                        <th >Acciones</th>
+                        <th style="width: 8rem" >Acciones</th>
 
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-rowData let-columns="cols">
                     <tr>
+                        <td *ngFor="let col of cols">
+                            {{rowData[col.field]}}
+                        </td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-text  mr-2" (click)="editCategoria(rowData)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="deleteProduct(product)"></button>
+                        </td>
                     </tr>
                 </ng-template>
 

@@ -19,6 +19,9 @@ import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 @NgModule({
@@ -44,7 +47,13 @@ import { DropdownModule } from 'primeng/dropdown';
     ImageModule,
     FileUploadModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    ConfirmDialogModule,
+    DynamicDialogModule
   ],
+  providers : [
+    DialogService,
+    ConfirmationService,
+  ]
 })
 export class AdministracionModule { }

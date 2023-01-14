@@ -9,8 +9,9 @@ import { LocacionesComponent } from './variables/locaciones.component';
 const routes: Routes = [
     {path:'',component: ProductosComponent },
     {path: 'productos', component : ProductosComponent},
-    {path: 'categorias', component : CategoriasComponent}
-
+    {path: 'categorias', component : CategoriasComponent},
+    {path: 'estados', component : EstadosComponent},
+    {path: 'localidades', component : LocacionesComponent},
 ];
 
 @NgModule({
