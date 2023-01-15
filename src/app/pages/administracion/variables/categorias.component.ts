@@ -76,7 +76,7 @@ export class CategoriasComponent implements OnInit {
 
     editCategoria(categoria : any) {
         this.ref = this.dialogService.open(VariablesComponent, {
-            header: 'Agregar Categoria',
+            header: 'Editar Categoria',
             width: 'auto',
             height: 'auto',
             contentStyle: { "overflow": "hidden" },
@@ -107,5 +107,41 @@ export class CategoriasComponent implements OnInit {
                 })
             }
         })
+    }
+
+
+    deleteProduct(categoria : any ){
+        console.log(categoria)
+        this.confirmationService.confirm({
+            message: 'Estas seguro de eliminar el registro?',
+            header: 'Confirmación',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this._categorias.categoriasDeleteCategoriaDelete({
+                    id : categoria.id
+                }).subscribe({
+                    next: (data : any)=>{
+                        console.log(data)
+                        data = JSON.parse(data)
+                        console.log(data)
+                        if(data.error == 0) {
+                            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Hay productos con esta categoria asociada' });
+                            return
+                        }
+                        this.messageService.add({ severity: 'success', summary: 'Información', detail: 'Categoria eliminada con exito!' });
+
+                    },
+                    complete:()=>{
+                        this.listarCategorias()
+                    },
+                    error: (error : any) =>{
+                        console.log(error)
+                    }
+                })
+            },
+            reject: (type) => {
+
+            }
+        });
     }
 }

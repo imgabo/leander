@@ -144,7 +144,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 import { ApiModule } from './api/api.module';
 import { environment } from 'src/environments/environment';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdministracionModule } from './pages/administracion/administracion.module';
 import { VariablesComponent } from './shared/components/dialogs/variables/variables.component';
@@ -308,7 +308,8 @@ export function tokenGetter() {
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, BreadcrumbService, MessageService
+        ConfirmationService, PhotoService, ProductService, MenuService, BreadcrumbService, MessageService
+
     ],
     bootstrap: [AppComponent]
 })
